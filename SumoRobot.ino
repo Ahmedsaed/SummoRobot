@@ -14,6 +14,7 @@ void loop() {
   // moveLeft();
   // delay(1000);
   // Serial.println("Right: " + String(distRight()) + "   - Left:  " + String(distLeft()));
-
   
+  Serial.println("Line Right: " + String(lineRight()));
+  delay(100);
 }
