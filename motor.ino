@@ -38,3 +38,10 @@ void moveLeft() {
   digitalWrite(motorRight1, LOW);
   digitalWrite(motorRight2, HIGH);
 }
+
+void stopMotors() {
+  digitalWrite(motorLeft1, LOW);
+  digitalWrite(motorLeft2, LOW);
+  digitalWrite(motorRight1, LOW);
+  digitalWrite(motorRight2, LOW);
+}
