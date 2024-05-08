@@ -1,66 +1,60 @@
-#define distLimit 50
-#define turnLimit 500
+#include "motor.h"
+#include "lineFollower.h"
+#include "ultrasonic.h"
+#include "log.h"
 
-void setup() {
+#define DIST_LIMIT 50
+#define TURN_LIMIT 500
+#define CYCLE_DELAY 500
+
+void setup()
+{
+#ifdef DEBUG_ENABLED
   Serial.begin(9600);
+#endif
   setupMotors();
 }
 
-void loop() {
+void loop()
+{
   boolean cr = lineRight();
   boolean cl = lineLeft();
 
-  if (cr && cl) {
+  if (cr && cl)
+  {
+    DEBUG_PRINTLN("Line Forward");
     moveBackward();
-    delay(turnLimit);
+    delay(TURN_LIMIT);
     moveRight();
-    delay(turnLimit);
+    delay(TURN_LIMIT);
   }
-  else if (cr) {
+  else if (cr)
+  {
+    DEBUG_PRINTLN("Line Right");
     moveLeft();
-    delay(turnLimit);
+    delay(TURN_LIMIT);
   }
-  else if (cl) {
+  else if (cl)
+  {
+    DEBUG_PRINTLN("Line Left");
+
     moveRight();
-    delay(turnLimit);
+    delay(TURN_LIMIT);
   }
-  else {
+  else
+  {
     int dr = distRight();
     int dl = distLeft();
-    Serial.println(String(dl) + "     " + String(dr));
-    if ((dr < distLimit && dr != 0) && (dl < distLimit && dl != 0)) {
-      Serial.println("Forward");
+    Serial.println("Ultrasonic: " + String(dl) + "     " + String(dr));
+    if ((dr < DIST_LIMIT && dr != 0) && (dl < DIST_LIMIT && dl != 0))
       moveForward();
-    }
-    else if (dr < distLimit && dr != 0) {
-      Serial.println("Right");
+    else if (dr < DIST_LIMIT && dr != 0)
       moveRight();
-    }
-    else if (dl < distLimit && dl != 0) {
-      Serial.println("Left");
+    else if (dl < DIST_LIMIT && dl != 0)
       moveLeft();
-    }
-    else {
-      Serial.println("Nothing");
+    else
       moveForward();
-    }
   }
 
-
-  delay(500);
+  delay(CYCLE_DELAY);
 }
-
-
-  // put your main code here, to run repeatedly:
-  // moveForward();
-  // delay(1000);
-  // moveBackward();
-  // delay(1000);
-  // moveRight();
-  // delay(1000);
-  // moveLeft();
-  // delay(1000);
-  // Serial.println("Right: " + String(distRight()) + "   - Left:  " + String(distLeft()));
-  
-  // Serial.println("Line Right: " + String(lineRight()));
-  // delay(100);
