@@ -1,7 +1,7 @@
 #ifndef __LOG__
 #define __LOG__
 
-#define DEBUG_ENABLED 1
+#define DEBUG_ENABLED 0
 
 #if DEBUG_ENABLED
 #define DEBUG_PRINT(msg) Serial.print(msg)

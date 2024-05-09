@@ -1,4 +1,5 @@
 #include "lineFollower.h"
+#include "MyRedBotSensor.h"
 #include "log.h"
 
 #define LFRight A1
